@@ -76,6 +76,7 @@ module BeakerRSpec
     # @option opts [String] :module_name The name of the module to be copied over
     def puppet_module_install opts = {}
       hosts.each do |host|
+        on host, "mkdir #{host['distmoduledir']}"
         scp_to host, opts[:source], "#{File.join(host['distmoduledir'])}/#{opts[:module_name]}"
       end
     end
